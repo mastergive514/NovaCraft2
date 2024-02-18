@@ -20,6 +20,7 @@ and for compiling , do `x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -share
 
 # Compiling in Linux
 note: you do not need to download Classicube
+
 do `cc main.c -o novacraft.so -shared -fPIC`, and copy and paste `novacraft.so` in classicube plugins folder
 
 
