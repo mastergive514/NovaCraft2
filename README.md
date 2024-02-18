@@ -9,11 +9,12 @@ a CC (Classicube) Plugin made to give you more features :D
 4. if you have Windows, use [w64devkit](https://github.com/skeeto/w64devkit). if you have Linux, just make sure that u have gcc installed
 # Compiling in Windows
 
-download Classicube.exe [here](https://www.classicube.net/download/)
-put Classicube.exe in classicube-master folder
-open `w64devkit.exe`, cd to your classicube-master folder
-do `gendef ClassiCube.exe` 
-do `x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe`
+1. download Classicube.exe [here](https://www.classicube.net/download/)
+2. put Classicube.exe in classicube-master folder
+3. open `w64devkit.exe`, cd to your classicube-master folder
+4. do `gendef ClassiCube.exe` 
+5. do `x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe`
+
 and for compiling , do `x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube`
 
 
