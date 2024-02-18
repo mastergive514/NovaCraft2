@@ -1,4 +1,4 @@
-# NovaCraft2
+# NovaCraft
 a CC (Classicube) Plugin made to give you more features :D
 
 # Setup Compiling
