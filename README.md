@@ -2,7 +2,7 @@
 a CC (Classicube) Plugin made to give you more features :D
 
 # Download
-[![Download Last Release](https://img.shields.io/badge/Download-Last%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/mastergive514/NovaCraft/releases/latest)
+[![Download Last Release](https://img.shields.io/badge/Download-Last%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/mastergive514/NovaCraft2/releases/latest)
 
 # Setup Compiling
 
