@@ -31,14 +31,14 @@
 #include "src/TexturePack.h"
 #include "src/Options.h"
 #include "src/Drawer2D.h"
-#include "src/NOVACRAFT.h"
+
 #include "src/Commands.h"
 #include "src/Vectors.h"
 #include "src/Vorbis.h"
 #include "src/Utils.h"
 #include "src/Server.h"
 
-#define novacraftrelease 0.1
+#define novacraftrelease "0.1"
  
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
@@ -61,7 +61,7 @@ static struct ChatCommand TestCmd = {
 
 
 static void VersionCommand_Execute(const cc_string* args, int argsCount) {
-    SendChat(novacraftrelease);
+    Chat_Add(novacraftrelease);
 }
 
 static struct ChatCommand VersionCmd = {
@@ -158,20 +158,20 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
     }
 
     if (String_CaselessEqualsConst(&args[0], "true")) {
-	p->Hacks.hanFly            = true;
-	p->Hacks.hanNoclip         = true;
-	p->Hacks.hanSpeed          = true;
-	p->Hacks.hanRespawn        = true;
-	p->Hacks.hanUseThirdPerson = true;
+	p->Hacks.CanFly            = true;
+	p->Hacks.CanNoclip         = true;
+	p->Hacks.CanSpeed          = true;
+	p->Hacks.CanRespawn        = true;
+	p->Hacks.CanUseThirdPerson = true;
         SendChat("&eHacks Enabled!"); 
   }
    else if (String_CaselessEqualsConst(&args[0], "false")) {
        
-	p->Hacks.hanFly            = false;
-	p->Hacks.hanNoclip         = false;
-	p->Hacks.hanSpeed          = false;
-	p->Hacks.hanRespawn        = false;
-	p->Hacks.hanUseThirdPerson = false;
+	p->Hacks.CanFly            = false;
+	p->Hacks.CanNoclip         = false;
+	p->Hacks.CanSpeed          = false;
+	p->Hacks.CanRespawn        = false;
+	p->Hacks.CanUseThirdPerson = false;
         SendChat("&eHacks Disabled!");
 
 }
