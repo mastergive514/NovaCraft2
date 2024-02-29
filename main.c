@@ -10,7 +10,6 @@
 
 
 
-#include <time.h>
 #include "src/Entity.h"
 #include "src/Chat.h"
 #include "src/String.h"
@@ -38,7 +37,18 @@
 #include "src/Utils.h"
 #include "src/Server.h"
 
-#define novacraftrelease "0.1"
+#define NovaCraftVersion "1.4"
+
+/*########################################################################################################################*
+*---------------------------------------------------Dynamic imports-------------------------------------------------------*
+*#########################################################################################################################*/
+// This is just to work around problems with normal dynamic linking
+// - Importing CC_VAR forces mingw to use runtime relocation, which bloats the dll (twice the size) on Windows
+// See the bottom of the file for the actual ugly importing
+static void LoadSymbolsFromGame(void);
+static struct _ServerConnectionData* Server_;
+
+static FP_String_AppendConst String_AppendConst_;
  
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
@@ -61,7 +71,7 @@ static struct ChatCommand TestCmd = {
 
 
 static void VersionCommand_Execute(const cc_string* args, int argsCount) {
-    Chat_Add(novacraftrelease);
+    Chat_Add(NovaCraftVersion);
 }
 
 static struct ChatCommand VersionCmd = {
@@ -189,11 +199,14 @@ static struct ChatCommand HacksCmd = {
 };
 
 static void NovaCraft_Init(void) {
+	LoadSymbolsFromGame();
 	Commands_Register(&CpeTestCmd);
-    Commands_Register(&HacksCmd);
-    Commands_Register(&ClearCmd);
+	Commands_Register(&HacksCmd);
+	Commands_Register(&ClearCmd);
 	Commands_Register(&WeatherCmd);
-    Commands_Register(&TestCmd);
+	Commands_Register(&TestCmd);
+
+	String_AppendConst_(&Server_->AppName, " + NovaCraft v1.4");
 }
 
 
@@ -214,3 +227,26 @@ PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 	NovaCraft_Init /* Init */
 };
 
+/*########################################################################################################################*
+*----------------------------------------------------Dynamic loading------------------------------------------------------*
+*#########################################################################################################################*/
+#define QUOTE(x) #x
+
+#ifdef CC_BUILD_WIN
+#define WIN32_LEAN_AND_MEAN
+#define NOSERVICE
+#define NOMCX
+#define NOIME
+#include <windows.h>
+#define LoadSymbol(name) name ## _ = GetProcAddress(GetModuleHandleA(NULL), QUOTE(name))
+#else
+#define _GNU_SOURCE
+#include <dlfcn.h>
+#define LoadSymbol(name) name ## _ = dlsym(RTLD_DEFAULT, QUOTE(name))
+#endif
+
+static void LoadSymbolsFromGame(void) {
+	LoadSymbol(Server); 
+
+	LoadSymbol(String_AppendConst);
+}
