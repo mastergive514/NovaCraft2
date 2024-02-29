@@ -46,7 +46,6 @@
 // - Importing CC_VAR forces mingw to use runtime relocation, which bloats the dll (twice the size) on Windows
 // See the bottom of the file for the actual ugly importing
 static void LoadSymbolsFromGame(void);
-
 static struct _ServerConnectionData* Server_;
 
 static FP_String_AppendConst String_AppendConst_;
@@ -72,7 +71,7 @@ static struct ChatCommand TestCmd = {
 
 
 static void VersionCommand_Execute(const cc_string* args, int argsCount) {
-    Chat_Add(novacraftrelease);
+    Chat_Add(NovaCraftVersion);
 }
 
 static struct ChatCommand VersionCmd = {
