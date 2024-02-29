@@ -10,7 +10,6 @@
 
 
 
-#include <time.h>
 #include "src/Entity.h"
 #include "src/Chat.h"
 #include "src/String.h"
@@ -47,7 +46,6 @@
 // - Importing CC_VAR forces mingw to use runtime relocation, which bloats the dll (twice the size) on Windows
 // See the bottom of the file for the actual ugly importing
 static void LoadSymbolsFromGame(void);
-static struct _GameData* Game_;
 
 static struct _ServerConnectionData* Server_;
 
@@ -249,8 +247,6 @@ PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 #endif
 
 static void LoadSymbolsFromGame(void) {
-	LoadSymbol(Game);
-
 	LoadSymbol(Server); 
 
 	LoadSymbol(String_AppendConst);
