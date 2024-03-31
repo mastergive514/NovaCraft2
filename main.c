@@ -221,7 +221,7 @@ static struct ChatCommand TP2Cmd = {
 	"TP2", TP2Command_Execute, false,
 	{
 		"&a/client TP2 [x y z]",
-		"&eMoves you to the given coordinates.",
+		"&eMoves you to the given coordinates, also works on Multiplayer.",
 	}
 };
 
