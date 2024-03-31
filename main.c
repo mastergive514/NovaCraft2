@@ -199,7 +199,7 @@ static struct ChatCommand HacksCmd = {
 };
 
 static void TP2Command_Execute(const cc_string* args, int argsCount) {
-    struct Entity* e = (struct LocalPlayer*)Entities.List[255];
+    struct Entity* e = (struct Entity*)Entities.List[255];
 	struct LocationUpdate update;
 	Vec3 v;
 
