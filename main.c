@@ -198,6 +198,33 @@ static struct ChatCommand HacksCmd = {
     }
 };
 
+static void TP2Command_Execute(const cc_string* args, int argsCount) {
+    struct Entity* e = (struct LocalPlayer*)Entities.List[255];
+	struct LocationUpdate update;
+	Vec3 v;
+
+	if (argsCount != 3) {
+		SendChat("&e/client TP2: &cYou didn't specify X, Y and Z coordinates.");
+		return;
+	}
+	if (!Convert_ParseFloat(&args[0], &v.x) || !Convert_ParseFloat(&args[1], &v.y) || !Convert_ParseFloat(&args[2], &v.z)) {
+		SendChat("&e/client TP2: &cCoordinates must be decimals");
+		return;
+	}
+
+	update.flags = LU_HAS_POS;
+	update.pos   = v;
+	e->VTABLE->SetLocation(e, &update);
+}
+
+static struct ChatCommand TP2Cmd = {
+	"TP2", TP2Command_Execute, false,
+	{
+		"&a/client TP2 [x y z]",
+		"&eMoves you to the given coordinates.",
+	}
+};
+
 static void NovaCraft_Init(void) {
 	LoadSymbolsFromGame();
 	Commands_Register(&CpeTestCmd);
@@ -205,6 +232,7 @@ static void NovaCraft_Init(void) {
 	Commands_Register(&ClearCmd);
 	Commands_Register(&WeatherCmd);
 	Commands_Register(&TestCmd);
+	Commands_Register(&TP2Cmd);
 
 	String_AppendConst_(&Server_->AppName, " + NovaCraft v1.4");
 }
