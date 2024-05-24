@@ -10,6 +10,7 @@
 
 
 
+#include <time.h>
 #include "src/Entity.h"
 #include "src/Chat.h"
 #include "src/String.h"
@@ -37,19 +38,19 @@
 #include "src/Utils.h"
 #include "src/Server.h"
 
-#define NovaCraftVersion "1.4"
 
+ 
 /*########################################################################################################################*
 *---------------------------------------------------Dynamic imports-------------------------------------------------------*
 *#########################################################################################################################*/
 // This is just to work around problems with normal dynamic linking
 // - Importing CC_VAR forces mingw to use runtime relocation, which bloats the dll (twice the size) on Windows
 // See the bottom of the file for the actual ugly importing
-static void LoadSymbolsFromGame(void);
 static struct _ServerConnectionData* Server_;
 
 static FP_String_AppendConst String_AppendConst_;
- 
+
+
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
@@ -64,24 +65,13 @@ static struct ChatCommand TestCmd = {
 	"Test", TestCommand_Execute, false,
 	{
 		"&a/client Test",
-		"&eExports current map to the schematic file format, as [filename].schematic.",
-		"&eThis can then be imported into software such as MCEdit.",
-	}
-};
-
-
-static void VersionCommand_Execute(const cc_string* args, int argsCount) {
-    Chat_Add(NovaCraftVersion);
-}
-
-static struct ChatCommand VersionCmd = {
-	"Version", VersionCommand_Execute, false,
-	{
-		"&a/client Version",
-		"",
+		"&eThis is just a test",
 		"",
 	}
 };
+
+
+
 
 
 static void CpeTestCommand_Execute(const cc_string* args, int argsCount) {
@@ -222,19 +212,17 @@ static struct ChatCommand TP2Cmd = {
 	{
 		"&a/client TP2 [x y z]",
 		"&eMoves you to the given coordinates, also works on Multiplayer.",
+                "&aShhh...",
 	}
 };
 
 static void NovaCraft_Init(void) {
-	LoadSymbolsFromGame();
-	Commands_Register(&CpeTestCmd);
-	Commands_Register(&HacksCmd);
-	Commands_Register(&ClearCmd);
-	Commands_Register(&WeatherCmd);
-	Commands_Register(&TestCmd);
-	Commands_Register(&TP2Cmd);
-
-	String_AppendConst_(&Server_->AppName, " + NovaCraft v1.4");
+    Commands_Register(&CpeTestCmd);
+    Commands_Register(&HacksCmd);
+    Commands_Register(&ClearCmd);
+    Commands_Register(&WeatherCmd);
+    Commands_Register(&TestCmd);
+    Commands_Register(&TP2Cmd);
 }
 
 
@@ -255,26 +243,3 @@ PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 	NovaCraft_Init /* Init */
 };
 
-/*########################################################################################################################*
-*----------------------------------------------------Dynamic loading------------------------------------------------------*
-*#########################################################################################################################*/
-#define QUOTE(x) #x
-
-#ifdef CC_BUILD_WIN
-#define WIN32_LEAN_AND_MEAN
-#define NOSERVICE
-#define NOMCX
-#define NOIME
-#include <windows.h>
-#define LoadSymbol(name) name ## _ = GetProcAddress(GetModuleHandleA(NULL), QUOTE(name))
-#else
-#define _GNU_SOURCE
-#include <dlfcn.h>
-#define LoadSymbol(name) name ## _ = dlsym(RTLD_DEFAULT, QUOTE(name))
-#endif
-
-static void LoadSymbolsFromGame(void) {
-	LoadSymbol(Server); 
-
-	LoadSymbol(String_AppendConst);
-}
