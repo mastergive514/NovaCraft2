@@ -157,7 +157,8 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
         SendChat("&eHacks Enabled!"); 
   }
    else if (String_CaselessEqualsConst(&args[0], "false")) {
-    p->Hacks.CanAnyHacks       = false;
+	
+        p->Hacks.CanAnyHacks       = false;
 	p->Hacks.CanFly            = false;
 	p->Hacks.CanNoclip         = false;
 	p->Hacks.CanSpeed          = false;
