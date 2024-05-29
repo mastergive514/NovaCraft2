@@ -39,17 +39,6 @@
 #include "src/Server.h"
 
 
- 
-/*########################################################################################################################*
-*---------------------------------------------------Dynamic imports-------------------------------------------------------*
-*#########################################################################################################################*/
-// This is just to work around problems with normal dynamic linking
-// - Importing CC_VAR forces mingw to use runtime relocation, which bloats the dll (twice the size) on Windows
-// See the bottom of the file for the actual ugly importing
-static struct _ServerConnectionData* Server_;
-
-static FP_String_AppendConst String_AppendConst_;
-
 
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
@@ -158,20 +147,23 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
     }
 
     if (String_CaselessEqualsConst(&args[0], "true")) {
+	p->Hacks.CanAnyHacks       = true;
 	p->Hacks.CanFly            = true;
 	p->Hacks.CanNoclip         = true;
 	p->Hacks.CanSpeed          = true;
 	p->Hacks.CanRespawn        = true;
 	p->Hacks.CanUseThirdPerson = true;
+	p->Hacks.CanBePushed       = false;
         SendChat("&eHacks Enabled!"); 
   }
    else if (String_CaselessEqualsConst(&args[0], "false")) {
-       
+    p->Hacks.CanAnyHacks       = false;
 	p->Hacks.CanFly            = false;
 	p->Hacks.CanNoclip         = false;
 	p->Hacks.CanSpeed          = false;
 	p->Hacks.CanRespawn        = false;
 	p->Hacks.CanUseThirdPerson = false;
+	p->Hacks.CanBePushed       = true;
         SendChat("&eHacks Disabled!");
 
 }
@@ -242,4 +234,3 @@ PLUGIN_EXPORT int Plugin_ApiVersion = 1;
 PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 	NovaCraft_Init /* Init */
 };
-
