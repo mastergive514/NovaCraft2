@@ -153,6 +153,7 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
 	p->Hacks.CanSpeed          = true;
 	p->Hacks.CanRespawn        = true;
 	p->Hacks.CanUseThirdPerson = true;
+	p->Hacks.CanPushbackBlocks = true;
 	p->Hacks.CanBePushed       = false;
         SendChat("&eHacks Enabled!"); 
   }
@@ -164,6 +165,7 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
 	p->Hacks.CanSpeed          = false;
 	p->Hacks.CanRespawn        = false;
 	p->Hacks.CanUseThirdPerson = false;
+	p->Hacks.CanPushbackBlocks = false;
 	p->Hacks.CanBePushed       = true;
         SendChat("&eHacks Disabled!");
 
