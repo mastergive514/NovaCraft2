@@ -29,7 +29,7 @@ jobs:
         git clone https://github.com/UnknownShadow200/ClassiCube.git
         cd ClassiCube
         wget https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c
-        cc main.c -o novacraft.so -shared -fPI
+        cc main.c -o novacraft.so -shared -fPIC
         mkdir -p output
         cp novacraft.so /output/
     
