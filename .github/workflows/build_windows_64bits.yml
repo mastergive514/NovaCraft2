@@ -1,0 +1,46 @@
+name: Build NovaCraft Plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build NovaCraft Linux
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc mingw-w64-tools
+        
+    - name: Clone Classicube, Plugin and Compile Plugin
+      run: |
+        git clone https://github.com/UnknownShadow200/ClassiCube.git
+        cd ClassiCube
+        wget https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c
+        wget https://cdn.classicube.net/client/release/win64/ClassiCube.exe
+        gendef ClassiCube.exe
+        x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe
+        mkdir output
+        x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube
+        cp novacraft.dll output/
+    
+        
+
+    
+    - name: Upload Plugin
+      uses: actions/upload-artifact@v3
+      with:
+        name: NovaCraft
+        path: ClassiCube/output/
