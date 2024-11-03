@@ -1,45 +1,41 @@
 # NovaCraft
-a CC (Classicube) Plugin made to give you more features :D
 
-# Download
-[![Download Last Release](https://img.shields.io/badge/Download-Last%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/mastergive514/NovaCraft2/releases/latest)
+A Classicube (CC) plugin designed to enhance your experience with additional features! :D
 
-# Setup Compiling 
+## Download
 
+[![Download Latest Release](https://img.shields.io/badge/Download-Last%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/mastergive514/NovaCraft2/releases/latest)
 
-1. Download Classicube Source code [here](https://github.com/UnknownShadow200/ClassiCube/archive/refs/heads/master.zip)
-2. Download main.c [here](https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c)
-3. Extract Classicube source code , and put main.c in classicube-master folder (make sure in classicube-master folder, there src folder)
-4. if you have Windows, use [w64devkit](https://github.com/skeeto/w64devkit). if you have Linux, just make sure that u have gcc installed
-## Note for Windows:
-If you have x32 Bits CPU , install mingw (search in google)
-I am assuming you used the installer from https://osdn.net/projects/mingw/
-Install MinGW. You need mingw32-base-bin and msys-base-bin packages
+## Setup Compiling
 
-## 64 Bits Windows
+### Prerequisites
 
-1. download Classicube.exe [here](https://www.classicube.net/download/) 64 Bits Version
-2. put Classicube.exe in classicube-master folder
-3. open `w64devkit.exe`, cd to your classicube-master folder
-4. do `gendef ClassiCube.exe` 
-5. do `x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe`
+1. **Download the Classicube Source Code:** [here](https://github.com/UnknownShadow200/ClassiCube/archive/refs/heads/master.zip).
+2. **Download `main.c`:** [here](https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c).
+3. **Extract the Classicube Source Code:** Place `main.c` in the `classicube-master` folder (make sure the `src` folder is present in the `classicube-master` directory).
 
-and for compiling , do `x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube`
+### Windows Instructions
 
-## 32 Bits Windows
+#### For 64-bit Windows:
 
-1. download Classicube.exe [here](https://www.classicube.net/download/) 32 Bits version
-2. put Classicube.exe in classicube-master folder
-3. Run msys.bat in the C:\MinGW\msys\1.0 folder and cd to your classicube-master folder
-4. do `gendef ClassiCube.exe`
-5. do `dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe`
-and for compiling , do `gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube`
-
-
-# Compiling in Linux
-note: you do not need to download Classicube
-
-do `cc main.c -o novacraft.so -shared -fPIC`, and copy and paste `novacraft.so` in classicube plugins folder
+1. **Download Classicube.exe:** [here](https://www.classicube.net/download/) (64-bit version).
+2. **Place Classicube.exe** in the `classicube-master` folder.
+3. **Open `w64devkit.exe`** and navigate to your `classicube-master` folder using `cd`.
+4. **Run the command:** 
+   ```gendef ClassiCube.exe```
+5. **Execute:** ```x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe```
+6. **For compiling, run:** ```x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube```
+#### For 32-bit Windows:
+1. **Download Classicube.exe:** [here](https://www.classicube.net/download/) (32-bit version).
+2. **Place Classicube.exe** in the `classicube-master` folder.
+3. **Run** ```msys.bat```: Located in the ```C:\MinGW\msys\1.0``` folder, then navigate to your ```classicube-master``` folder using ```cd```.
+4. **Run the command:** ```gendef ClassiCube.exe```
+5. **Execute**: ```dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe```
+6. **For compiling, run:** ```gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube```
+### Linux Instructions
+**Note:** You do not need to download Classicube.
+1. **Run The Command:** ```gcc main.c -o novacraft.so -shared -fPIC```
 
 
-**Have Fun** :D
+## Have Fun!
+
