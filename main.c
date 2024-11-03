@@ -88,13 +88,13 @@ static struct ChatCommand CpeTestCmd = {
 };
 
 static void EnableBuildingCommand_Execute(const cc_string* args, int argsCount) {
-
+      Blocks.CanPlace[BLOCK_LAVA] = true; 
 	
 }
 static struct ChatCommand EnableBuildingCmd = {
 	"EnableBuilding", EnableBuildingCommand_Execute, false,
 	{
-		"&a/client EnableBuilding [True/False]",
+		"&a/client EnableBuilding [Block]",
 		"&eLets say it makes u build everywhere",
 		"",
 	}
