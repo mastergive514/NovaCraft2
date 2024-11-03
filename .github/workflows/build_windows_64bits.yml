@@ -10,37 +10,32 @@ on:
 
 jobs:
   build:
-    name: Build NovaCraft Linux
+    name: Build NovaCraft for Windows
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-mingw-w64 g++-mingw-w64
 
+      - name: Clone Classicube, Download Plugin, and Compile
+        run: |
+          git clone https://github.com/UnknownShadow200/ClassiCube.git
+          cd ClassiCube
+          wget https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c
+          wget https://cdn.classicube.net/client/release/win64/ClassiCube.exe
+          gendef ClassiCube.exe
+          dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe
+          mkdir output
+          x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube
+          cp novacraft.dll output/
 
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y gcc mingw-w64-tools
-        
-    - name: Clone Classicube, Plugin and Compile Plugin
-      run: |
-        git clone https://github.com/UnknownShadow200/ClassiCube.git
-        cd ClassiCube
-        wget https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c
-        wget https://cdn.classicube.net/client/release/win64/ClassiCube.exe
-        gendef ClassiCube.exe
-        x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe
-        mkdir output
-        x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube
-        cp novacraft.dll output/
-    
-        
-
-    
-    - name: Upload Plugin
-      uses: actions/upload-artifact@v3
-      with:
-        name: NovaCraft
-        path: ClassiCube/output/
+      - name: Upload Plugin
+        uses: actions/upload-artifact@v3
+        with:
+          name: NovaCraft
+          path: ClassiCube/output/
