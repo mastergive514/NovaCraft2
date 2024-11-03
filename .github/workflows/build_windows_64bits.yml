@@ -29,7 +29,7 @@ jobs:
           wget https://raw.githubusercontent.com/mastergive514/NovaCraft2/main/main.c
           wget https://cdn.classicube.net/client/release/win64/ClassiCube.exe
           gendef ClassiCube.exe
-          dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe
+          x86_64-w64-mingw32-dlltool -d ClassiCube.def -l libClassiCube.a -D ClassiCube.exe
           mkdir output
           x86_64-w64-mingw32-gcc main.c -o novacraft.dll -s -shared -L . -lClassiCube
           cp novacraft.dll output/
