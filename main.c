@@ -229,10 +229,11 @@ static void NovaCraft_Init(void) {
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
+
+    Commands_Register(&EnableBuildingCmd);
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
-    Commands_Register(&EnableBuildingCmd);
 }
 
 
