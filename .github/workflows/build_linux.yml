@@ -1,4 +1,4 @@
-name: Build NovaCraft Plugin
+name: Build for Linux
 
 on:
   push:
