@@ -96,7 +96,7 @@ static struct ChatCommand EnableBuildingCmd = {
 	{
 		"&a/client EnableBuilding [Block]",
 		"&eLets say it makes u build everywhere",
-		"",
+		"THIS COMMAND IS STILL IN ALPHA",
 	}
 };
 
@@ -216,6 +216,29 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 	e->VTABLE->SetLocation(e, &update);
 }
 
+static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
+    char appname[64];
+    
+    memcpy(appname, args[0].buffer, args[0].length);
+    for (int i = args[0].length; i < 64; i++) { appname[i] = ' '; }
+    
+    cc_uint8 buffer[67];
+    buffer[0] = 0x10;
+    memcpy(buffer + 1, appname, 64);
+    buffer[65] = 0; buffer[66] = 0;
+    
+    Server.SendData(buffer, 67);
+}
+
+static struct ChatCommand ChangeAppnameCommand = {
+    "ChangeAppname", ChangeAppnameCommand_Execute,
+    COMMAND_FLAG_UNSPLIT_ARGS,
+    {
+        "&a/ChangeAppname [new app name]",
+        "&aChanges your client name to the desired one.",
+    }
+};
+
 static struct ChatCommand TP2Cmd = {
 	"TP2", TP2Command_Execute, false,
 	{
@@ -230,7 +253,8 @@ static void NovaCraft_Init(void) {
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
 
-    Commands_Register(&EnableBuildingCmd);
+    Commands_Register(&ChangeAppnameCommand);
+    Commands_Register(&EnableBuildingCmd); 
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
