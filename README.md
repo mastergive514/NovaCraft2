@@ -39,3 +39,7 @@ A Classicube (CC) plugin designed to enhance your experience with additional fea
 
 ## Have Fun!
 
+
+## Thanking:
+
+Thanks to [ToastyBred](https://github.com/1ToastyBred1/) for working on ChangeAppnname Command.
