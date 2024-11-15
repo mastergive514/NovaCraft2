@@ -220,7 +220,12 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 }
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
+
+    if (args[0].
     char appname[64];
+
+    int len = strlen(appname);
+    
     
     memcpy(appname, args[0].buffer, args[0].length);
     for (int i = args[0].length; i < 64; i++) { appname[i] = ' '; }
@@ -229,7 +234,7 @@ static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
     buffer[0] = 0x10;
     memcpy(buffer + 1, appname, 64);
     buffer[65] = 0; buffer[66] = 0;
-    
+    if (len > 56 || len <= 0) { SendChat("/ChangeAppname: New app name must be under 56 characters"); return; }
     Server.SendData(buffer, 67);
 }
 
