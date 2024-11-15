@@ -221,7 +221,6 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
 
-    if (args[0].
     char appname[64];
 
     int len = strlen(appname);
