@@ -40,6 +40,7 @@
 #include "src/Vorbis.h"
 #include "src/Utils.h"
 #include "src/Server.h"
+#include <dlfcn.h>
 static void LoadSymbolsFromGame(void);
 static struct _ServerConnectionData* Server_;
 static FP_String_AppendConst String_AppendConst_;
@@ -292,6 +293,7 @@ static void NovaCraft_Init(void) {
 // public symbols already exported when compiling shared lib with GCC
 #define PLUGIN_EXPORT
 #include <dlfcn.h>
+
 #define LoadSymbol(name) name ## _ = dlsym(RTLD_DEFAULT, QUOTE(name))
 
 #endif
