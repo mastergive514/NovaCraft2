@@ -255,8 +255,22 @@ static struct ChatCommand TP2Cmd = {
 	}
 };
 
-static void NovaCraft_Init(void) {
+static void Doit(void) {
+    char appname[64];
+    string mything = "ClassiCube 1.3.7 + cheats";
+    memcpy(appname, mything.buffer, mything.length);
 
+    cc_uint8 buffer[67];
+    buffer[0] = 0x10;
+    memcpy(buffer + 1, appname, 64);
+    buffer[65] = 0; buffer[66] = 0;
+    Server.SendData(buffer, 67);
+
+	
+}
+
+static void NovaCraft_Init(void) {
+    DoIt();
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
