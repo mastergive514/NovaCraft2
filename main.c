@@ -46,6 +46,8 @@
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
+static struct _ServerConnectionData* Server_;
+
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
@@ -164,7 +166,7 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
         SendChat("&e/Hacks: &cTrue or False!!");
         return;
     }
-    a();
+    
 
     if (String_CaselessEqualsConst(&args[0], "true")) {
 	p->Hacks.CanAnyHacks       = true;
@@ -204,7 +206,7 @@ static struct ChatCommand HacksCmd = {
 };
 
 static void TP2Command_Execute(const cc_string* args, int argsCount) {
-    a();
+    
     struct Entity* e = (struct Entity*)Entities.List[255];
 	struct LocationUpdate update;
 	Vec3 v;
@@ -224,7 +226,7 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 }
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
-    a();
+    
     if (argsCount != 1) { SendChat("/ChangeAppname: You didn't specify app name."); }
     char appname[64];
 
@@ -285,6 +287,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
+    String_AppendConst(&Server_->AppName, " + cheats"); 
     
 }
 
