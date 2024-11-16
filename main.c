@@ -272,7 +272,6 @@ static void NovaCraft_Init(void) {
     Commands_Register(&TP2Cmd);
     char appname[64] = GAME_APP_NAME " + cheats";
 
-    for (int i = args[0].length; i < 64; i++) { appname[i] = ' '; }
     
     cc_uint8 buffer[67];
     buffer[0] = 0x10;
