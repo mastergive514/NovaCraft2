@@ -12,7 +12,7 @@
 #endif
 
 
-
+#include <string.h>
 #include <time.h>
 #include "src/Entity.h"
 #include "src/Chat.h"
