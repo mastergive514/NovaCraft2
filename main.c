@@ -222,7 +222,7 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
 
-    if (argsCount != 1) { SendChat("/ChangeAppname: You didn't specify app name.");
+    if (argsCount != 1) { SendChat("/ChangeAppname: You didn't specify app name."); }
     char appname[64];
 
     int len = strlen(appname);
