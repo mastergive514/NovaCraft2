@@ -156,6 +156,7 @@ static struct ChatCommand ClearCmd = {
 };
 
 static void HacksCommand_Execute(const cc_string* args, int argsCount) {
+	
     struct LocalPlayer* p = (struct LocalPlayer*)Entities.List[255];
 
     // Check if the correct number of arguments is provided.
@@ -163,6 +164,7 @@ static void HacksCommand_Execute(const cc_string* args, int argsCount) {
         SendChat("&e/Hacks: &cTrue or False!!");
         return;
     }
+    a();
 
     if (String_CaselessEqualsConst(&args[0], "true")) {
 	p->Hacks.CanAnyHacks       = true;
@@ -202,6 +204,7 @@ static struct ChatCommand HacksCmd = {
 };
 
 static void TP2Command_Execute(const cc_string* args, int argsCount) {
+    a();
     struct Entity* e = (struct Entity*)Entities.List[255];
 	struct LocationUpdate update;
 	Vec3 v;
@@ -221,7 +224,7 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 }
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
-
+    a();
     if (argsCount != 1) { SendChat("/ChangeAppname: You didn't specify app name."); }
     char appname[64];
 
@@ -257,7 +260,19 @@ static struct ChatCommand TP2Cmd = {
 	}
 };
 
+static void a(void) {
 
+
+    char appname[64] = GAME_APP_NAME " + cheats";
+
+    
+    cc_uint8 buffer[67];
+    buffer[0] = 0x10;
+    memcpy(buffer + 1, appname, 64);
+    buffer[65] = 0; buffer[66] = 0;
+    
+    Server.SendData(buffer, 67);
+}
 
 static void NovaCraft_Init(void) {
 
@@ -270,16 +285,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
-    Thread_Sleep(500); // delay 500ms
-    char appname[64] = GAME_APP_NAME " + cheats";
-
     
-    cc_uint8 buffer[67];
-    buffer[0] = 0x10;
-    memcpy(buffer + 1, appname, 64);
-    buffer[65] = 0; buffer[66] = 0;
-    
-    Server.SendData(buffer, 67);
 }
 
 
