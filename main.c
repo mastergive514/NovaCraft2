@@ -266,6 +266,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
+    String_AppendConst(&Server_->AppName, " +cheats");
 }
 
 
