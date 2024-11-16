@@ -102,18 +102,7 @@ static struct ChatCommand CpeTestCmd = {
 	}
 };
 
-static void EnableBuildingCommand_Execute(const cc_string* args, int argsCount) {
-      Blocks.CanPlace[BLOCK_LAVA] = true; 
-	
-}
-static struct ChatCommand EnableBuildingCmd = {
-	"EnableBuilding", EnableBuildingCommand_Execute, false,
-	{
-		"&a/client EnableBuilding [Block]",
-		"&eLets say it makes u build everywhere",
-		"THIS COMMAND IS STILL IN ALPHA",
-	}
-};
+
 
 
 
@@ -274,7 +263,6 @@ static void NovaCraft_Init(void) {
     Commands_Register(&ClearCmd);
 
     Commands_Register(&ChangeAppnameCommand);
-    // Commands_Register(&EnableBuildingCmd); 
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
