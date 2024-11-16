@@ -80,7 +80,7 @@ static void CpeTestCommand_Execute(const cc_string* args, int argsCount) {
     Chat_AddOf(&message, MSG_TYPE_BOTTOMRIGHT_2);
     Chat_AddOf(&message, MSG_TYPE_BOTTOMRIGHT_3);
     Chat_Add(&message);
-    if (args[0] == "clear") { 
+    if (String_CaselessEqualsConst(&args[0], "clear")) { 
     Chat_AddOf(&message2, MSG_TYPE_ANNOUNCEMENT);
     Chat_AddOf(&message2, MSG_TYPE_BIGANNOUNCEMENT);
     Chat_AddOf(&message2, MSG_TYPE_SMALLANNOUNCEMENT);
