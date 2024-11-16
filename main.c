@@ -23,6 +23,8 @@
 #include "src/Game.h"
 #include "src/Logger.h"
 #include "src/Server.h"
+#include "src/Constants.h"
+
 #include "src/World.h"
 #include "src/Inventory.h"
 #include "src/Window.h"
@@ -44,8 +46,9 @@
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
-
+static struct _ServerConnectionData* Server;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
+
 
 static void TestCommand_Execute(const cc_string* args, int argsCount) {
     Window_ShowDialog("TEST", "Just a test");
@@ -255,22 +258,10 @@ static struct ChatCommand TP2Cmd = {
 	}
 };
 
-static void Doit(void) {
-    char appname[64];
-    cc_string mything = String_FromConst("ClassiCube 1.3.7 + cheats");
-    memcpy(appname, mything.buffer, mything.length);
 
-    cc_uint8 buffer[67];
-    buffer[0] = 0x10;
-    memcpy(buffer + 1, appname, 64);
-    buffer[65] = 0; buffer[66] = 0;
-    Server.SendData(buffer, 67);
-
-	
-}
 
 static void NovaCraft_Init(void) {
-    Doit();
+    String_AppendConst(&Server->AppName, " + cheats"); 
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
