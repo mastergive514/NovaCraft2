@@ -270,7 +270,7 @@ static void Doit(void) {
 }
 
 static void NovaCraft_Init(void) {
-    DoIt();
+    Doit();
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
