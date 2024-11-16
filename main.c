@@ -48,6 +48,7 @@
 *#########################################################################################################################*/
 
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
+static struct _ServerConnectionData* Server_;
 
 static void TestCommand_Execute(const cc_string* args, int argsCount) {
     Window_ShowDialog("TEST", "Just a test");
