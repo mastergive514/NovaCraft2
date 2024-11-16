@@ -46,7 +46,6 @@
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
-static struct _ServerConnectionData* Servera;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
@@ -261,7 +260,8 @@ static struct ChatCommand TP2Cmd = {
 
 
 static void NovaCraft_Init(void) {
-    String_AppendConst(&Servera->AppName, " + cheats"); 
+
+	
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
@@ -270,6 +270,16 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
+    char appname[64] = GAME_APP_NAME " + cheats";
+
+    for (int i = args[0].length; i < 64; i++) { appname[i] = ' '; }
+    
+    cc_uint8 buffer[67];
+    buffer[0] = 0x10;
+    memcpy(buffer + 1, appname, 64);
+    buffer[65] = 0; buffer[66] = 0;
+    
+    Server.SendData(buffer, 67);
 }
 
 
