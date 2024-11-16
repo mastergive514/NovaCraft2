@@ -258,6 +258,7 @@ static struct ChatCommand TP2Cmd = {
 };
 
 static void NovaCraft_Init(void) {
+    LoadSymbolsFromGame();
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
@@ -288,3 +289,11 @@ PLUGIN_EXPORT int Plugin_ApiVersion = 1;
 PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 	NovaCraft_Init /* Init */
 };
+
+
+static void LoadSymbolsFromGame(void) {
+	
+	LoadSymbol(Server); 
+
+	LoadSymbol(String_AppendConst);
+}
