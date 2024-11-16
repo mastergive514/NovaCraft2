@@ -48,7 +48,6 @@
 *#########################################################################################################################*/
 
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
-static struct _ServerConnectionData* Server_;
 
 static void TestCommand_Execute(const cc_string* args, int argsCount) {
     Window_ShowDialog("TEST", "Just a test");
@@ -259,6 +258,8 @@ static struct ChatCommand TP2Cmd = {
 };
 
 static void NovaCraft_Init(void) {
+    struct _ServerConnectionData* Server_;
+
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
