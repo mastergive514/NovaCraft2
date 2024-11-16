@@ -257,8 +257,8 @@ static struct ChatCommand TP2Cmd = {
 	}
 };
 
+public static struct _ServerConnectionData* Server_;
 static void NovaCraft_Init(void) {
-    struct _ServerConnectionData* Server_;
 
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
@@ -268,7 +268,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
-    String_AppendConst(&Server->AppName, " +cheats");
+    String_AppendConst(&Server_->AppName, " +cheats");
 }
 
 
