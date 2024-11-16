@@ -40,8 +40,9 @@
 #include "src/Vorbis.h"
 #include "src/Utils.h"
 #include "src/Server.h"
-
+static void LoadSymbolsFromGame(void);
 static struct _ServerConnectionData* Server_;
+static FP_String_AppendConst String_AppendConst_;
 
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
