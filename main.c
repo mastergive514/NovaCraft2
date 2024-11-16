@@ -1,5 +1,5 @@
 // LAST RELEASE BUILD: 1.4
-// LAST DEV BUILD: 1.4b
+// LAST DEV BUILD: 1.4b1
 
 // Since we are building an external plugin dll, we need to import from ClassiCube lib instead of exporting these
 #ifdef CC_BUILD_WIN
