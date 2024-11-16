@@ -270,6 +270,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
+    Thread_Sleep(500); // delay 500ms
     char appname[64] = GAME_APP_NAME " + cheats";
 
     
