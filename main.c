@@ -257,7 +257,7 @@ static struct ChatCommand TP2Cmd = {
 
 static void Doit(void) {
     char appname[64];
-    string mything = "ClassiCube 1.3.7 + cheats";
+    cc_string mything = String_FromConst("ClassiCube 1.3.7 + cheats");
     memcpy(appname, mything.buffer, mything.length);
 
     cc_uint8 buffer[67];
