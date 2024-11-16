@@ -279,11 +279,21 @@ static void NovaCraft_Init(void) {
 *#########################################################################################################################*/
 // Since we are building an external plugin dll, we need to import from ClassiCube lib instead of exporting these
 #ifdef CC_BUILD_WIN
+
+#define NOSERVICE
+#define NOMCX
+#define NOIME
+#include <windows.h>
+#define LoadSymbol(name) name ## _ = GetProcAddress(GetModuleHandleA(NULL), QUOTE(name))
+
 // special attribute to get symbols exported with Visual Studio
 #define PLUGIN_EXPORT __declspec(dllexport)
 #else
 // public symbols already exported when compiling shared lib with GCC
 #define PLUGIN_EXPORT
+#include <dlfcn.h>
+#define LoadSymbol(name) name ## _ = dlsym(RTLD_DEFAULT, QUOTE(name))
+
 #endif
 
 PLUGIN_EXPORT int Plugin_ApiVersion = 1;
