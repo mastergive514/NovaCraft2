@@ -67,9 +67,9 @@ static struct ChatCommand TestCmd = {
 
 
 static void CpeTestCommand_Execute(const cc_string* args, int argsCount) {
-    SendChat("use /CpeTest clear to reset all CPE Messages");
+    SendChat("&fuse &a/CpeTest clear &fto reset all CPE Messages");
     cc_string message = String_FromConst("Hello, World!");
-    if (args[0] == "clear") { message = String_FromConst(""); }
+    cc_string message2 = String_FromConst("");
     Chat_AddOf(&message, MSG_TYPE_ANNOUNCEMENT);
     Chat_AddOf(&message, MSG_TYPE_BIGANNOUNCEMENT);
     Chat_AddOf(&message, MSG_TYPE_SMALLANNOUNCEMENT);
@@ -80,6 +80,17 @@ static void CpeTestCommand_Execute(const cc_string* args, int argsCount) {
     Chat_AddOf(&message, MSG_TYPE_BOTTOMRIGHT_2);
     Chat_AddOf(&message, MSG_TYPE_BOTTOMRIGHT_3);
     Chat_Add(&message);
+    if (args[0] == "clear") { 
+    Chat_AddOf(&message2, MSG_TYPE_ANNOUNCEMENT);
+    Chat_AddOf(&message2, MSG_TYPE_BIGANNOUNCEMENT);
+    Chat_AddOf(&message2, MSG_TYPE_SMALLANNOUNCEMENT);
+    Chat_AddOf(&message2, MSG_TYPE_STATUS_1);
+    Chat_AddOf(&message2, MSG_TYPE_STATUS_2);
+    Chat_AddOf(&message2, MSG_TYPE_STATUS_3);
+    Chat_AddOf(&message2, MSG_TYPE_BOTTOMRIGHT_1);
+    Chat_AddOf(&message2, MSG_TYPE_BOTTOMRIGHT_2);
+    Chat_AddOf(&message2, MSG_TYPE_BOTTOMRIGHT_3);
+    }
 }
 
 static struct ChatCommand CpeTestCmd = {
@@ -222,6 +233,7 @@ static void TP2Command_Execute(const cc_string* args, int argsCount) {
 
 static void ChangeAppnameCommand_Execute(const cc_string* args, int argsCount) {
 
+    if (argsCount != 1) { SendChat("/ChangeAppname: You didn't specify app name.");
     char appname[64];
 
     int len = strlen(appname);
