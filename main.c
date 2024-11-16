@@ -287,7 +287,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
-    String_AppendConst(&Server_->AppName, " + cheats"); 
+    String_AppendConst(&Server.AppName, " + cheats"); 
     
 }
 
@@ -303,6 +303,10 @@ static void NovaCraft_Init(void) {
 // public symbols already exported when compiling shared lib with GCC
 #define PLUGIN_EXPORT
 #endif
+
+
+
+
 
 PLUGIN_EXPORT int Plugin_ApiVersion = 1;
 PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
