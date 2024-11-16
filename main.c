@@ -1,4 +1,4 @@
-// LAST RELEASE BUILD: 1.3
+// LAST RELEASE BUILD: 1.4
 // LAST DEV BUILD: 1.4b
 
 // Since we are building an external plugin dll, we need to import from ClassiCube lib instead of exporting these
@@ -67,8 +67,9 @@ static struct ChatCommand TestCmd = {
 
 
 static void CpeTestCommand_Execute(const cc_string* args, int argsCount) {
+    SendChat("use /CpeTest clear to reset all CPE Messages");
     cc_string message = String_FromConst("Hello, World!");
-
+    if (args[0] == "clear") { message = String_FromConst(""); }
     Chat_AddOf(&message, MSG_TYPE_ANNOUNCEMENT);
     Chat_AddOf(&message, MSG_TYPE_BIGANNOUNCEMENT);
     Chat_AddOf(&message, MSG_TYPE_SMALLANNOUNCEMENT);
@@ -261,7 +262,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&ClearCmd);
 
     Commands_Register(&ChangeAppnameCommand);
-    Commands_Register(&EnableBuildingCmd); 
+    // Commands_Register(&EnableBuildingCmd); 
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
