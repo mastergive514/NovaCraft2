@@ -1,5 +1,5 @@
 // LAST RELEASE BUILD: 1.4
-// LAST DEV BUILD: 1.4b1
+// LAST DEV BUILD: 1.4b
 
 // Since we are building an external plugin dll, we need to import from ClassiCube lib instead of exporting these
 #ifdef CC_BUILD_WIN
@@ -40,10 +40,6 @@
 #include "src/Vorbis.h"
 #include "src/Utils.h"
 #include "src/Server.h"
-#include <dlfcn.h>
-static void LoadSymbolsFromGame(void);
-static struct _ServerConnectionData* Server_;
-static FP_String_AppendConst String_AppendConst_;
 
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
@@ -260,7 +256,7 @@ static struct ChatCommand TP2Cmd = {
 };
 
 static void NovaCraft_Init(void) {
-    LoadSymbolsFromGame();
+
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
@@ -269,9 +265,6 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
-    String_AppendConst_(&Server_->AppName, " + cheats");
-
-    
 }
 
 
@@ -280,33 +273,14 @@ static void NovaCraft_Init(void) {
 *#########################################################################################################################*/
 // Since we are building an external plugin dll, we need to import from ClassiCube lib instead of exporting these
 #ifdef CC_BUILD_WIN
-
-#define NOSERVICE
-#define NOMCX
-#define NOIME
-#include <windows.h>
-#define LoadSymbol(name) name ## _ = GetProcAddress(GetModuleHandleA(NULL), QUOTE(name))
-
 // special attribute to get symbols exported with Visual Studio
 #define PLUGIN_EXPORT __declspec(dllexport)
 #else
 // public symbols already exported when compiling shared lib with GCC
 #define PLUGIN_EXPORT
-#include <dlfcn.h>
-
-#define LoadSymbol(name) name ## _ = dlsym(RTLD_DEFAULT, QUOTE(name))
-
 #endif
 
 PLUGIN_EXPORT int Plugin_ApiVersion = 1;
 PLUGIN_EXPORT struct IGameComponent Plugin_Component = {
 	NovaCraft_Init /* Init */
 };
-
-
-static void LoadSymbolsFromGame(void) {
-	
-	LoadSymbol(Server); 
-
-	LoadSymbol(String_AppendConst);
-}
