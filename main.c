@@ -46,7 +46,7 @@
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
-static struct _ServerConnectionData* Server;
+static struct _ServerConnectionData* Servera;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
@@ -261,7 +261,7 @@ static struct ChatCommand TP2Cmd = {
 
 
 static void NovaCraft_Init(void) {
-    String_AppendConst(&Server->AppName, " + cheats"); 
+    String_AppendConst(&Servera->AppName, " + cheats"); 
     Commands_Register(&CpeTestCmd);
     Commands_Register(&HacksCmd);
     Commands_Register(&ClearCmd);
