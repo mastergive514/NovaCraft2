@@ -41,7 +41,7 @@
 #include "src/Utils.h"
 #include "src/Server.h"
 
-
+static struct _ServerConnectionData* Server_;
 
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
@@ -257,7 +257,6 @@ static struct ChatCommand TP2Cmd = {
 	}
 };
 
-public static struct _ServerConnectionData* Server_;
 static void NovaCraft_Init(void) {
 
     Commands_Register(&CpeTestCmd);
