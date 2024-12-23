@@ -6,9 +6,11 @@
 // need to specifically declare as imported for Visual Studio
 #define CC_API __declspec(dllimport)
 #define CC_VAR __declspec(dllimport)
+#define EXPORT __declspec(dllexport)
 #else
 #define CC_API
 #define CC_VAR
+#define EXPORT __attribute__((visibility("default")))
 #endif
 
 
@@ -44,6 +46,8 @@
 #include "src/Server.h"
 #include "src/Protocol.h"
 
+Net_Handler Classic_Handshake;
+
 /*########################################################################################################################*
 *---------------------------------------------------Plugin implementation-------------------------------------------------*
 *#########################################################################################################################*/
@@ -52,7 +56,6 @@ static struct _ServerConnectionData* Server_;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
-Net_Handler Classic_Handshake;
 
 static void ChangeMotdCommand_Execute(const cc_string* args, int argsCount) {
 	if (Server.IsSinglePlayer) return;
