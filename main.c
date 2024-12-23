@@ -45,6 +45,7 @@
 #include "src/Utils.h"
 #include "src/Server.h"
 #include "src/Protocol.h"
+#include "src/TexturePack.h"
 
 Net_Handler Classic_Handshake;
 
@@ -56,6 +57,20 @@ static struct _ServerConnectionData* Server_;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
+static void ChangeTexture_Execute(const cc_string* args, int argsCount) {
+	if (!argsCount) return;
+	
+	TexturePack_Extract(args);
+}
+
+static struct ChatCommand ChangeTextureCommand = {
+	"ChangeTexture", ChangeTexture_Execute,
+	COMMAND_FLAG_UNSPLIT_ARGS,
+	{
+		"&a/ChangeTexture [url]",
+		"&aChanges texture using specified url."
+	}
+};
 
 static void ChangeMotdCommand_Execute(const cc_string* args, int argsCount) {
 	if (Server.IsSinglePlayer) return;
@@ -313,6 +328,7 @@ static void NovaCraft_Init(void) {
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
     Commands_Register(&ChangeMotdCommand);
+    Commands_Register(&ChangeTextureCommand);
     Classic_Handshake = Protocol.Handlers[OPCODE_HANDSHAKE];
     String_AppendConst(&Server.AppName, " + cheats"); 
     
