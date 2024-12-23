@@ -2,6 +2,9 @@
 
 A Classicube (CC) plugin designed to enhance your experience with additional features! :D
 
+This Plugin is open-source code, with GNU License.
+This Plugin combain All Hacked and Fun Commands to one plugin!
+
 ## Download
 
 [![Download Latest Release](https://img.shields.io/badge/Download-Last%20Release-brightgreen?style=for-the-badge&logo=github)](https://github.com/mastergive514/NovaCraft2/releases/latest)
@@ -42,4 +45,4 @@ A Classicube (CC) plugin designed to enhance your experience with additional fea
 
 ## Thanking:
 
-Thanks to [ToastyBred](https://github.com/1ToastyBred1/) for creating the ChangeAppnname, ChangeMotd and ChangeTexture Commands.
+Thanks to [ToastyBred](https://github.com/1ToastyBred1/) for creating the ChangeAppname, ChangeMotd and ChangeTexture Commands.
