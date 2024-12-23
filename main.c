@@ -51,6 +51,35 @@ static struct _ServerConnectionData* Server_;
 #define SendChat(msg) const static cc_string str = String_FromConst(msg); Chat_Add(&str);
 
 
+Net_Handler Classic_Handshake;
+
+static void ChangeMotdCommand_Execute(const cc_string* args, int argsCount) {
+	if (Server.IsSinglePlayer) return;
+	
+	cc_uint8 buffer[130];
+	
+	String_CopyToRaw(buffer, 64, &Server.Name);
+	String_CopyToRaw(buffer + 65, 64, args);
+	
+	for (int i = Server.Name.length; i < 64; i++) { buffer[i] = ' '; }
+	for (int i = 65 + args->length; i < 129; i++) { buffer[i] = ' '; }
+	
+	cc_uint8 user_type = Entities.CurPlayer->Hacks.IsOp ? 0x64 : 0x00;
+	buffer[129] = user_type;
+	
+	Classic_Handshake(buffer);
+}
+
+static struct ChatCommand ChangeMotdCommand = {
+	"ChangeMotd", ChangeMotdCommand_Execute,
+	COMMAND_FLAG_UNSPLIT_ARGS,
+	{
+		"&a/ChangeMotd [motd]",
+		"&eChanges motd to the desired one."
+	}
+};
+
+
 static void TestCommand_Execute(const cc_string* args, int argsCount) {
     Window_ShowDialog("TEST", "Just a test");
 }
@@ -279,6 +308,8 @@ static void NovaCraft_Init(void) {
     Commands_Register(&WeatherCmd);
     Commands_Register(&TestCmd);
     Commands_Register(&TP2Cmd);
+    Commands_Register(&ChangeMotdCommand);
+    Classic_Handshake = Protocol.Handlers[OPCODE_HANDSHAKE];
     String_AppendConst(&Server.AppName, " + cheats"); 
     
 }
