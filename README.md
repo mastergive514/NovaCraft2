@@ -42,4 +42,4 @@ A Classicube (CC) plugin designed to enhance your experience with additional fea
 
 ## Thanking:
 
-Thanks to [ToastyBred](https://github.com/1ToastyBred1/) for creating the ChangeAppnname Command.
+Thanks to [ToastyBred](https://github.com/1ToastyBred1/) for creating the ChangeAppnname, ChangeMotd and ChangeTexture Command.
