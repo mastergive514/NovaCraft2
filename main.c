@@ -68,7 +68,8 @@ static struct ChatCommand ChangeTextureCommand = {
 	COMMAND_FLAG_UNSPLIT_ARGS,
 	{
 		"&a/ChangeTexture [url]",
-		"&aChanges texture using specified url."
+		"&aChanges texture using specified url.",
+                "Credits to ToastyBred for making this command",
 	}
 };
 
@@ -94,7 +95,8 @@ static struct ChatCommand ChangeMotdCommand = {
 	COMMAND_FLAG_UNSPLIT_ARGS,
 	{
 		"&a/ChangeMotd [motd]",
-		"&eChanges motd to the desired one."
+		"&eChanges motd to the desired one.",
+                "Credits to ToastyBred for making this command",
 	}
 };
 
@@ -290,6 +292,7 @@ static struct ChatCommand ChangeAppnameCommand = {
     {
         "&a/ChangeAppname [new app name]",
         "&aChanges your client name to the desired one.",
+        "Credits to ToastyBred for making this command",
     }
 };
 
